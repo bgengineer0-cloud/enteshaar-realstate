@@ -12,7 +12,7 @@ frontend/.env
 backend/uploads/
 
 # ملفات Build
-frontend/build/
+#frontend/build/
 
 # ملفات النظام
 .DS_Store
