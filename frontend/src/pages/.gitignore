@@ -1,0 +1,19 @@
+# Node modules (ضخمة جدًا — لا ترفعها)
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# ملفات البيئة (تحتوي كلمات مرور — لا ترفعها أبدًا)
+.env
+backend/.env
+frontend/.env
+
+# ملفات الصور المرفوعة
+backend/uploads/
+
+# ملفات Build
+frontend/build/
+
+# ملفات النظام
+.DS_Store
+Thumbs.db
