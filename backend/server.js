@@ -117,6 +117,9 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 initDB().then(() => {
+  app.get('/', (req, res) => {
+  res.json({ status: 'Enteshaar Backend is running ✅' });
+});
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }).catch(err => {
   console.error('Failed to init DB:', err.message);
