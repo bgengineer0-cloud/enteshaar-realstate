@@ -26,6 +26,14 @@
   position: fixed; top: 0; width: 100%; z-index: 1000;
   padding: 20px 0;
   transition: var(--transition);
+
+}
+.navbaro {
+  position: fixed; top: 0; width: 100%; z-index: 1000;
+  padding: 20px 0;
+  transition: var(--transition);
+    background: rgba(255, 255, 255, 0.97);
+background: linear-gradient(135deg, var(--purple), var(--purple-light));
 }
 .navbar.scrolled {
   background: rgba(255,255,255,0.97);
@@ -228,7 +236,7 @@
   background: radial-gradient(circle, rgba(61,44,110,0.05) 0%, transparent 70%);
 }
 .services-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
 }
 .service-card {
   background: white; border-radius: var(--radius);
@@ -251,7 +259,7 @@
 }
 .service-card:hover::before, .service-card.active::before { width: 100%; }
 .service-card-img {
-  width: 100%; height:100%; object-fit: cover;
+  width: 100%; height: 160px; object-fit: cover;
   border-radius: 10px; margin-bottom: 20px;
 }
 .service-icon { font-size: 2.5rem; margin-bottom: 16px; }

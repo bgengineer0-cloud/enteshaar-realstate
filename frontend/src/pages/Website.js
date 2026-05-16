@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContent } from '../context/ContentContext';
 import './Website.css';
+import './About';
+import './Services';
+import './Contact';
 
 const API_BASE = process.env.REACT_APP_API_URL?.replace('/api', '') || 'http://localhost:3001';
 
@@ -56,7 +59,7 @@ export default function Website() {
       </div>
     </div>
   );
-
+const navigate = useNavigate;
   const hero = content.hero || {};
   const about = content.about || {};
   const contact = content.contact || {};
@@ -77,9 +80,11 @@ export default function Website() {
           </div>
 
           <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <a href="#about" onClick={() => setMenuOpen(false)}>من نحن</a>
-            <a href="#services" onClick={() => setMenuOpen(false)}>خدماتنا</a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>تواصل معنا</a>
+            <Link to="/" onClick={() => setMenuOpen(false)}>الرئيسية</Link>
+
+            <Link to="/About" onClick={() => setMenuOpen(false)}>من نحن</Link>
+            <Link to="/Services" onClick={() => setMenuOpen(false)}>خدماتنا</Link>
+            <Link to="/Contact" onClick={() => setMenuOpen(false)}>تواصل معنا</Link>
             <Link to="/admin" className="btn btn-gold nav-admin" onClick={() => setMenuOpen(false)}>
               <Icon name="settings" size={16} /> لوحة التحكم
             </Link>
@@ -120,174 +125,7 @@ export default function Website() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="section about-section">
-        <div className="container">
-          <div className="about-grid">
-            <div className="about-img-side">
-              <div className="about-img-frame">
-                {imgSrc(about.image_url)
-                  ? <img src={imgSrc(about.image_url)} alt="about" />
-                  : <div className="about-placeholder">
-                      <div className="placeholder-dots">
-                        {[...Array(25)].map((_, i) => <span key={i} />)}
-                      </div>
-                    </div>
-                }
-                <div className="about-badge-float">
-                  <Icon name="building" size={28} />
-                  <span>عقارات متميزة</span>
-                </div>
-              </div>
-            </div>
-            <div className="about-text-side">
-              <div className="gold-line" />
-              <h2 className="section-title">{about.title_ar || 'من نحن'}</h2>
-              <p className="about-body">{about.body_ar || 'شركة انتشار العقارية متخصصة في المجال العقاري بالمنطقة الشرقية'}</p>
-              {about.body_en && <p className="about-body-en">{about.body_en}</p>}
-              <div className="about-features">
-                {['خبرة واسعة في السوق العقاري', 'فريق متخصص ومؤهل', 'خدمات متكاملة تحت سقف واحد', 'حلول مخصصة لكل عميل'].map((f, i) => (
-                  <div key={i} className="feature-item">
-                    <span className="feature-check"><Icon name="check" size={14} /></span>
-                    <span>{f}</span>
-                  </div>
-                ))}
-              </div>
-              <a href="#services" className="btn btn-primary" style={{ marginTop: 32 }}>تعرف على خدماتنا <Icon name="arrow" size={18} /></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section id="services" className="section services-section">
-        <div className="services-bg-shape" />
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
-            <div className="gold-line" style={{ margin: '0 auto 24px' }} />
-            <h2 className="section-title">خدماتنا المتكاملة</h2>
-            <p className="section-subtitle">نقدم مجموعة شاملة من الخدمات العقارية المتميزة</p>
-          </div>
-
-          <div className="services-grid">
-            {services.map(({ key, icon, color }) => {
-              const s = content[key] || {};
-              return (
-                <div
-                  key={key}
-                  className={`service-card ${activeService === key ? 'active' : ''}`}
-                  onClick={() => setActiveService(activeService === key ? null : key)}
-                  style={{ '--card-color': color }}
-                >
-                  <div className="service-card-inner">
-                    {imgSrc(s.image_url) && <img src={imgSrc(s.image_url)} alt={s.title_ar} className="service-card-img" />}
-                    <div className="service-icon">{icon}</div>
-                    <h3 className="service-title">{s.title_ar || key}</h3>
-                    <p className="service-title-en">{s.title_en || ''}</p>
-                    {s.body_ar && <p className="service-desc">{s.body_ar}</p>}
-                    {s.extra?.services_ar && (
-                      <ul className="service-list">
-                        {s.extra.services_ar.slice(0, 4).map((item, i) => (
-                          <li key={i}><Icon name="check" size={12} />{item}</li>
-                        ))}
-                      </ul>
-                    )}
-                    {s.extra?.items_ar && (
-                      <div className="service-tags">
-                        {s.extra.items_ar.slice(0, 5).map((item, i) => (
-                          <span key={i} className="service-tag">{item}</span>
-                        ))}
-                      </div>
-                    )}
-                    {s.extra?.items_en && !s.extra?.items_ar && (
-                      <div className="service-tags">
-                        {s.extra.items_en.slice(0, 4).map((item, i) => (
-                          <span key={i} className="service-tag">{item}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="section contact-section">
-        <div className="container">
-          <div className="contact-grid">
-            <div className="contact-info">
-              <div className="gold-line" />
-              <h2 className="section-title" style={{ color: 'white' }}>{contact.title_ar || 'تواصل معنا'}</h2>
-              <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: 40, fontSize: '1.05rem' }}>
-                {contact.body_ar || 'نحن هنا لمساعدتك في كل ما يتعلق بالعقارات'}
-              </p>
-
-              <div className="contact-items">
-                {contact.extra?.phone1 && (
-                  <div className="contact-item">
-                    <div className="contact-icon"><Icon name="phone" size={22} /></div>
-                    <div>
-                      <span className="contact-label">هاتف</span>
-                      <a href={`tel:${contact.extra.phone1}`} className="contact-value">{contact.extra.phone1}</a>
-                      {contact.extra.phone2 && <a href={`tel:${contact.extra.phone2}`} className="contact-value">{contact.extra.phone2}</a>}
-                    </div>
-                  </div>
-                )}
-                {contact.extra?.email && (
-                  <div className="contact-item">
-                    <div className="contact-icon"><Icon name="mail" size={22} /></div>
-                    <div>
-                      <span className="contact-label">البريد الإلكتروني</span>
-                      <a href={`mailto:${contact.extra.email}`} className="contact-value">{contact.extra.email}</a>
-                    </div>
-                  </div>
-                )}
-                {contact.extra?.website && (
-                  <div className="contact-item">
-                    <div className="contact-icon"><Icon name="web" size={22} /></div>
-                    <div>
-                      <span className="contact-label">الموقع الإلكتروني</span>
-                      <a href={`https://${contact.extra.website}`} className="contact-value">{contact.extra.website}</a>
-                    </div>
-                  </div>
-                )}
-                {contact.body_ar && (
-                  <div className="contact-item">
-                    <div className="contact-icon"><Icon name="location" size={22} /></div>
-                    <div>
-                      <span className="contact-label">العنوان</span>
-                      <span className="contact-value">{contact.body_ar}</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {contact.extra?.social && (
-                <div className="social-row">
-                  <span className="social-label">تابعنا:</span>
-                  <a href="#" className="social-btn">{contact.extra.social}</a>
-                </div>
-              )}
-            </div>
-
-            <div className="contact-cta">
-              <div className="cta-card">
-                <h3>هل أنت مهتم بخدماتنا؟</h3>
-                <p>تواصل معنا الآن وسيقوم فريقنا المتخصص بمساعدتك</p>
-                <a href={`tel:${contact.extra?.phone1 || ''}`} className="btn btn-gold" style={{ width: '100%', justifyContent: 'center', marginBottom: 16 }}>
-                  <Icon name="phone" size={18} /> اتصل بنا الآن
-                </a>
-                <a href={`mailto:${contact.extra?.email || ''}`} className="btn btn-outline" style={{ width: '100%', justifyContent: 'center', color: 'white', borderColor: 'rgba(255,255,255,0.4)' }}>
-                  <Icon name="mail" size={18} /> راسلنا عبر البريد
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
       {/* Footer */}
       <footer className="footer">
