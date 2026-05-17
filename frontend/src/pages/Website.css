@@ -28,13 +28,7 @@
   transition: var(--transition);
 
 }
-.navbaro {
-  position: fixed; top: 0; width: 100%; z-index: 1000;
-  padding: 20px 0;
-  transition: var(--transition);
-    background: rgba(255, 255, 255, 0.97);
-background: linear-gradient(135deg, var(--purple), var(--purple-light));
-}
+
 .navbar.scrolled {
   background: rgba(255,255,255,0.97);
   backdrop-filter: blur(20px);

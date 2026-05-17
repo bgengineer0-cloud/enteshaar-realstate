@@ -109,8 +109,8 @@ const navigate = useNavigate;
           <p className="hero-subtitle">{hero.title_en || 'ENTESHAAR Real Estate'}</p>
           <p className="hero-desc">{hero.body_ar || 'شريكك الموثوق في عالم العقارات'}</p>
           <div className="hero-actions">
-            <a href="#services" className="btn btn-gold">اكتشف خدماتنا <Icon name="arrow" size={18} /></a>
-            <a href="#contact" className="btn btn-outline" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.5)' }}>تواصل معنا</a>
+            <Link to="/Services" className="btn btn-gold">اكتشف خدماتنا <Icon name="arrow" size={18} /></Link>
+            <Link to="/Contact" className="btn btn-outline" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.5)' }}>تواصل معنا</Link>
           </div>
           <div className="hero-stats">
             <div className="stat"><span className="stat-num">6+</span><span className="stat-lbl">خدمات متكاملة</span></div>
